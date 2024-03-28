@@ -1,7 +1,17 @@
 from openpyxl import load_workbook, Workbook
+from pathlib import Path
+import environ
+import os
 
-FILE_NAME_TO_READ = 'original.xlsx'
-FILE_NAME_TO_WRITE = 'result.xlsx'
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env.prod'))
+
+FILE_NAME_TO_READ = env('FILE_NAME_TO_READ')
+FILE_NAME_TO_WRITE = env('FILE_NAME_TO_WRITE')
+
 
 # VERIFY if data is valid
 cnt = 0
